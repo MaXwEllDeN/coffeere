@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Coffeere</title>
+      <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="style.css">
+      <link rel="shortcut icon" href="favicon.png">
+  </head>
+  <body>
+    <div class="header">
+      <img src="header.png">
+    </div>
+    
+    <div class="wrapper">
+      <div class="feature">
+        <div class="feature__bottle">
+          <div class="water-bottle">
+              <div class="cap">
+                  <div class="cap-top"></div>
+                  <div class="cap-seal"></div>
+              </div>
+              <div id="bottle" class="bottle bottle_full">
+                  <div id="water" class="water"></div>
+              </div>
+          </div>
+        </div>
+        <div class="feature__item info_section">
+          <p><b>Status: </b> <span id="fill">0.00mL</span></p>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">Powered by Coffeere.</footer>
+    <script>
+      var service = "http://maxwellden.pythonanywhere.com/coffe";
+      function toggleClass(element, toggleClass){
+        var currentClass = element.className;
+        var newClass;
+        if(currentClass.split(" ").indexOf(toggleClass) > -1){ //has class
+          newClass = currentClass.replace(new RegExp('\\b'+toggleClass+'\\b','g'),"")
+        }else{
+          newClass = currentClass + " " + toggleClass;
+        }
+        
+        element.className = newClass.trim();
+      }
+
+      function toggleBottle(new_class) {
+        var bottle = document.getElementById("bottle");
+        bottle.className = "bottle";
+        toggleClass(bottle, new_class)
+      }
+
+      function loadData() {
+        $.getJSON(service, function(data) {
+
+          if (data["fill"] <= 10) {
+            $("#fill").html("Vazio ou sem garrafa.");
+          }
+          else {
+            $("#fill").html(data["fill"].toFixed(2) + "mL");
+          }
+
+          if (data["fill"] < 150) {
+            toggleBottle("");
+          }
+          else if (data["fill"] >= 2500) {
+            $("#fill").html("Alguém está utilizando a garrafa.");
+          }
+          else if (data["fill"] >= 850) {            
+            toggleBottle("bottle_full");
+          }
+          else if (data["fill"] >= 630) {
+            toggleBottle("bottle_third");
+          }
+          else if (data["fill"] >= 315) {
+            toggleBottle("bottle_half");            
+          }          
+          else {
+            toggleBottle("bottle_quarter");
+          }
+        });
+      }
+
+      window.onload = function() {
+        setInterval(loadData, 2000);
+      }
+    </script>
+  </body>
+</html>
