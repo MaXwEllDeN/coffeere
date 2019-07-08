@@ -12,6 +12,7 @@ HX711 scale;
 int counterToPost = 0;
 int counterWifiTimeout = 0;
 int counterToReset = 0;
+
 void startConfigurationMode()
 {
   WiFi.mode(WIFI_AP_STA);
@@ -23,12 +24,24 @@ void startConfigurationMode()
   server.begin();
 }
 
+void interruptTare()
+{
+  setLedStatus(LED_STATUS_RED);
+
+  double sum = scale.read_average();
+  scale.set_offset(sum);
+  saveScaleOffset(sum);
+  delay(250);
+}
+
 void setup() {
   pinMode(PIN_LED_RED, OUTPUT);
   pinMode(PIN_LED_GREEN, OUTPUT);
 
-  pinMode(PIN_BUTTON_TARE, INPUT);
-  pinMode(PIN_BUTTON_RESET, INPUT);
+  pinMode(PIN_BUTTON_RESET, INPUT_PULLUP);
+
+  pinMode(PIN_BUTTON_TARE, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(PIN_BUTTON_TARE), interruptTare, FALLING);
 
   setLedStatus(LED_STATUS_RED);
 
@@ -98,17 +111,6 @@ void loop() {
     server.getServerObject()->handleClient();
   }
   else if (operation_mode == WORKING_MODE) {
-    if (!digitalRead(PIN_BUTTON_TARE)) {
-      setLedStatus(LED_STATUS_RED);
-
-      double sum = scale.read_average();
-      scale.set_offset(sum);
-      saveScaleOffset(sum);
-      delay(500);
-
-      counterToPost += 500;
-    }
-
     while(!digitalRead(PIN_BUTTON_RESET)) {
       setLedStatus(LED_STATUS_YELLOW);
 
