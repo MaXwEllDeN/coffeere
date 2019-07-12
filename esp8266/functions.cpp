@@ -122,7 +122,7 @@ String getSavedPassword()
 
 bool isAppletConfigured()
 {
-    return getSavedSSID() != "";
+    return getSavedSSID() != "" && getSavedSSID() != "null";
 }
 
 void restartApplet()
