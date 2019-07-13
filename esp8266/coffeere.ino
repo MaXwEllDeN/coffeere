@@ -4,6 +4,7 @@
 #include "functions.h"
 #include "HX711.h"
 
+#define DEBUG 1
 MODULE_MODE operation_mode;
 
 Webserver server;
@@ -24,37 +25,31 @@ void startConfigurationMode()
   server.begin();
 }
 
-void interruptTare()
-{
-  setLedStatus(LED_STATUS_RED);
-
-  double sum = scale.read_average();
-  scale.set_offset(sum);
-  saveScaleOffset(sum);
-  delay(250);
-}
-
 void setup() {
   pinMode(PIN_LED_RED, OUTPUT);
   pinMode(PIN_LED_GREEN, OUTPUT);
 
-  pinMode(PIN_BUTTON_RESET, INPUT_PULLUP);
-
   pinMode(PIN_BUTTON_TARE, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(PIN_BUTTON_TARE), interruptTare, FALLING);
+  pinMode(PIN_BUTTON_RESET, INPUT_PULLUP);
 
   setLedStatus(LED_STATUS_RED);
 
   Serial.begin(115200);
   delay(10);
-
+  Serial.println("Iniciando Coffere");
   SPIFFS.begin();
 
   if (!isAppletConfigured()) {
     operation_mode = CONFIGURATION_MODE;
     startConfigurationMode();
+    Serial.println("Entrando em modo de configuração.");
   }
   else {
+    Serial.println("Entrando em modo de funcionamento normal.");
+    Serial.print("SSID Salvo:`");
+    Serial.print(getSavedSSID());
+    Serial.println("`");
+
     scale.begin(PIN_HX711_DOUT, PIN_HX711_CLK);
     WiFi.mode(WIFI_OFF);        //Prevents reconnection issue (taking too long to connect)
     delay(1000);
@@ -76,13 +71,17 @@ void setup() {
     // Wait for connection
     while (WiFi.status() != WL_CONNECTED) {
       if (counterWifiTimeout >= TIMEOUT_WIFI_CONNECT) {
+        setLedStatus(LED_STATUS_RED);
         break;
       }
 
+      setLedStatus(LED_STATUS_OFF);
       counterWifiTimeout += 500;
-      delay(500);
+      delay(250);
+      setLedStatus(LED_STATUS_RED);
+      delay(250);
 
-      #ifdef __DEBUG__      
+      #ifdef __DEBUG__
       Serial.print(".");
       #endif // __DEBUG__
     }
@@ -111,6 +110,18 @@ void loop() {
     server.getServerObject()->handleClient();
   }
   else if (operation_mode == WORKING_MODE) {
+
+    if (!digitalRead(PIN_BUTTON_TARE)) {
+      setLedStatus(LED_STATUS_RED);
+
+      double sum = scale.read_average();
+      scale.set_offset(sum);
+      saveScaleOffset(sum);
+      delay(500);
+
+      counterToPost += 500;
+    }
+    
     while(!digitalRead(PIN_BUTTON_RESET)) {
       setLedStatus(LED_STATUS_YELLOW);
 
@@ -127,14 +138,20 @@ void loop() {
       delay(100);
     }
 
-    counterToReset = 0;    
+    counterToReset = 0;
 
     if (counterToPost >= 2000) {
       int httpCode = postWeight(scale);
       counterToPost = 0;
+
+      if (httpCode == 200) {
+        setLedStatus(LED_STATUS_GREEN);
+      }
+      else {
+        setLedStatus(LED_STATUS_RED);
+      }
     }
 
-    setLedStatus(LED_STATUS_GREEN);
     counterToPost += 100;
     delay(100);
   }

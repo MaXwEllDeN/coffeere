@@ -19,7 +19,7 @@ void Webserver::handleConfiguration()
   String ssid = server_object->arg("ssid");
   String password = server_object->arg("password");
     
-  String content = "<html><head><meta charset='UTF-8'><title>Detector de Gás</title>";
+  String content = "<html><head><meta charset='UTF-8'><title>Coffeere</title>";
   content += "<link rel='stylesheet' href='style.css'>";
   content += "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
   content += "</head><body><div class='logo'></div>";

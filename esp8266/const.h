@@ -3,7 +3,7 @@
 
 #define APPLET_IP_IDENTIFIER          1
 #define TIMEOUT_WIFI_CONNECT          60000
-#define TIME_PRESSING_TO_RESET        5000
+#define TIME_PRESSING_TO_RESET        4
 #define SCALE_CALIBRATION_FACTOR      300
 
 #define PIN_HX711_DOUT      14
