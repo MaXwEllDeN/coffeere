@@ -7,12 +7,12 @@
 #define SCALE_CALIBRATION_FACTOR      300
 
 #define PIN_HX711_DOUT      14
-#define PIN_HX711_CLK       16
+#define PIN_HX711_CLK       12
 
 #define PIN_LED_RED         13
-#define PIN_LED_GREEN       12
+#define PIN_LED_GREEN       2
 #define PIN_BUTTON_RESET    4
-#define PIN_BUTTON_TARE     2
+#define PIN_BUTTON_TARE     16
 
 enum MODULE_MODE {
   CONFIGURATION_MODE,
