@@ -4,7 +4,7 @@
 
 ## Overview
 
-Coffeere is a platform for those of you who got tired of going to the kitchen just to realize that the coffe bottle is empty :tired_face:.
+Coffeere is a platform for those of you who got tired of going to the kitchen just to realize that the coffee bottle is empty :tired_face:.
 
 ## Requirements
 
