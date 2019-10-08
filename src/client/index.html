@@ -56,9 +56,11 @@
 
       function loadData() {
         $.getJSON(service, function(data) {
-
-          if (data["fill"] <= 10) {
-            $("#fill").html("Vazio ou sem garrafa.");
+          if (data["fill"] < 0) {
+            $("#fill").html("Garrafa fora do lugar.");
+          }
+          else if (data["fill"] < 100) {
+            $("#fill").html("Vazio.");
           }
           else {
             $("#fill").html(data["fill"].toFixed(2) + "mL");
