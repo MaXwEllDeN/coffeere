@@ -9,11 +9,9 @@ This directory contains the [Autodesk's EAGLE](https://www.autodesk.com/products
 ## Printed Circuit Board
 
 ### Board after the layout transference
-
-![](../assets/pci01.jpg | width=100)
+![](../assets/pci01.jpg)
 
 ### Board with ESP8266-12e soldered
-
-![](../assets/pci01.jpg | width=100)
+![](../assets/pci02.jpg)
 
 
