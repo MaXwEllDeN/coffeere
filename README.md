@@ -10,3 +10,4 @@ Coffeere is a platform for those of you who got tired of going to the kitchen ju
 
 * [HX711 Weight Load library](https://github.com/bogde/HX711)
 * [ESP8266 FS Tool](https://github.com/esp8266/arduino-esp8266fs-plugin)
+* [ArduinoJson library version 6.12.0](https://github.com/bblanchon/ArduinoJson) 
