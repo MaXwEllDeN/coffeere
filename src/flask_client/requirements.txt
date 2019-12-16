@@ -1,0 +1,5 @@
+flask
+Flask-SQLAlchemy
+py-vapid
+cryptography
+pywebpush

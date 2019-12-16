@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+      <title>Coffeere</title>    
+      <meta charset="utf-8">
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+      <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+      <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+      <link rel="shortcut icon" href="{{ url_for('static',filename='images/favicon.png') }}">
+  </head>
+  <body>
+    <div class="header">
+      <img src="{{ url_for('static',filename='images/header.png') }}">
+    </div>
+    
+    <div class="wrapper">
+      <div class="feature">
+        <div class="feature__bottle">
+          <div class="water-bottle">
+              <div class="cap">
+                  <div class="cap-top"></div>
+                  <div class="cap-seal"></div>
+              </div>
+              <div id="bottle" class="bottle bottle_full">
+                  <div id="water" class="water"></div>
+              </div>
+          </div>
+        </div>
+        <div class="feature__item info_section">
+          <p><b>Status: </b> <span id="fill">0.00mL</span></p>
+          <button id="btn-vip-coffee" class="btn btn-2 btn-2a icon-heart-2">Me avise quando tiver café novinho</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">Powered by Coffeere.</footer>
+    <script src="{{ url_for('static',filename='main.js') }}"></script>
+  </body>
+</html>

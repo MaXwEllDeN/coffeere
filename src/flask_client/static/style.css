@@ -1,0 +1,217 @@
+
+.header {
+  text-align: center;
+  margin-bottom: 2%;
+  margin-top: 3%;
+}
+
+.feature__bottle {
+  display: inline-block;
+  margin: 0px;
+}
+
+.feature__item {
+  position: absolute;
+  display: inline-block;
+  margin-top: 6%;
+}
+
+.feature__item p{
+  margin: 0px;
+}
+
+.gear {
+  margin-top: 10%;
+  width: 64px; 
+  height: 64px;
+  animation: like-gif steps(28) 1s infinite both;
+  animation-play-state: paused;
+}
+
+.gear .pause {
+  animation-play-state: paused;
+}
+
+.info_section {
+  margin-left: 15%;
+  position: top;
+}
+
+:root {
+  --primary-color: #bc6a12;
+}
+
+/* normalized */
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Nunito Sans', sans-serif;
+  background-color: white;
+}
+
+p {
+  font-weight: 300;
+  color: #4A4A4A;
+  padding-top: 5px;
+}
+
+hr {
+  padding: 1rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--bg-color);
+}
+
+
+/* layout */
+.wrapper {
+  margin: 0 auto;
+  margin-left: 25%;
+  width: 70%;  
+}
+
+.footer {
+  margin-top: 1%;
+  text-align: center;
+  background-color: var(--primary-color);
+  padding: 2rem;
+  color: white;
+}
+
+/* Water bottle */
+
+body { margin:10%; margin-top:0px;}
+
+.bottle {
+    position: relative;
+    background: #ddd;
+    width:100px;
+    border-radius:30px 30px 6px 6px;
+    height:200px;
+    padding:6px;
+    box-shadow: 3px 3px 3px #efefef;
+    margin-bottom:4px;
+}
+
+/* Transition*/
+.bottle .water {
+    background-image: url("images/waves.png");
+    background-position: top right;
+    position: absolute;
+    bottom: 6px;
+    width: 100px;
+    height: 60px;
+    -webkit-transition: all 2s ease-out;
+    -moz-transition: all 2s ease-out;
+    transition: all 2s ease-out;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.bottle_quarter .water {
+  height: 90px;
+  background-position: top center;
+  -webkit-transition: all 2s ease-out;
+  -moz-transition: all 2s ease-out;
+  transition: all 2s ease-out;
+}
+
+.bottle_half .water {
+  height: 120px;
+  background-position: top left;
+  -webkit-transition: all 2s ease-out;
+  -moz-transition: all 2s ease-out;
+  transition: all 2s ease-out;
+}
+
+.bottle_third .water {
+  height: 180px;
+  background-position: top right;
+  -webkit-transition: all 2s ease-out;
+  -moz-transition: all 2s ease-out;
+  transition: all 2s ease-out;
+}
+
+.bottle_full .water {
+    height: 220px;
+    background-position: top left;
+    -webkit-transition: all 2s ease-out;
+    -moz-transition: all 2s ease-out;
+    transition: all 2s ease-out;
+}
+.cap { background: #ddd; margin:0 25px;width:60px;border-radius:8px 8px 10px  12px; height:35px;border-top:1px solid #ddd; border-bottom:2px dotted #efefef;}
+.cap-top { background:#ededed; height:6px; border-radius:10px 10px 0 0; }
+.cap-seal { margin-top:20px;background:#ccc; height:6px; border-radius: 0 0 10px 10px; }
+
+
+/* General button style (reset) */
+
+.btn {
+	border: none;
+	font-family: inherit;
+	color: inherit;
+	background: none;
+	cursor: pointer;
+	padding: 5px 15px;
+	display: inline-block;
+  text-transform: uppercase;
+  margin-top: 15px;
+	letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 12px;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.btn:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+/* Pseudo elements for icons */
+.btn:before{
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	position: relative;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Button 2 */
+.btn-2 {
+	background: #cb4e4e;
+	color: #fff;
+	box-shadow: 0 6px #ab3c3c;
+	-webkit-transition: none;
+	-moz-transition: none;
+	transition: none;
+}
+
+/* Button 2a */
+.btn-2a {
+	border-radius: 0 0 5px 5px;
+}
+
+.btn-2a:hover {
+	box-shadow: 0 4px #ab3c3c;
+	top: 2px;
+}
+
+.btn-2a:active {
+	box-shadow: 0 0 #ab3c3c;
+	top: 6px;
+}
+
+******************/
+
